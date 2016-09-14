@@ -1,0 +1,40 @@
+// -----------------------------------------------------------------------------
+// This file contains SASS mixins.
+// -----------------------------------------------------------------------------
+
+/// Responsive breakpoint manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints (set in _variables)
+/// @link http://sass-guidelin.es/#breakpoint-manager Sass Guidelines - Breakpoint Manager
+@mixin respond-to($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+
+  @if not $query {
+    @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.';
+  }
+
+  @media #{if(type-of($query) == 'string', unquote($query), inspect($query))} {
+    @content;
+  }
+}
+
+@mixin clearfix {
+  &::before {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/// Maintain aspect ratio
+/// @param {Number} $width [16] - Width
+/// @param {Number} $height [9] - Height
+@mixin aspect-ratio($width: 16, $height: 9) {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: percentage($height / $width);
+  }
+}
