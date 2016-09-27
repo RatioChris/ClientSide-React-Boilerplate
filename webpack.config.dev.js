@@ -95,12 +95,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: path.join(__dirname, 'src'),
-        loader: 'style-loader!css-loader!postcss-loader'
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       },
       {
         test: /\.html$/,
-        loader: 'raw-loader'
+        loader: 'raw'
       },
       {
         test: /\.(jpg|png|svg)$/,

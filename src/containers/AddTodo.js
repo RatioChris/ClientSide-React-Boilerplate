@@ -25,7 +25,7 @@ let AddTodo = ({ dispatch }) => {
 }
 
 AddTodo.propTypes = {
-  dispatch: PropTypes.string
+  dispatch: PropTypes.func.isRequired
 }
 
 AddTodo = connect()(AddTodo)

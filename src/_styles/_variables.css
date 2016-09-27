@@ -11,7 +11,7 @@
 
   /* Brand Colors */
   --whiteish:              #f7f7f7;
-  --greyish:               #b2b2b2;
+  --greyish:               #ddd;
   --magenta:               #ff26ef;
 
   /* Color Assignments */
@@ -31,6 +31,7 @@
   /* Misc */
   --body-bgcolor:          var(--whiteish);
   --header-bgcolor:        var(--black);
+  --footer-bgcolor:        var(--greyish);
   --max-width:             1600px;
   --gutter-width:          3rem;
   --base-border-width:     8px;
@@ -38,7 +39,7 @@
   --transition-time:       .2s;
 
   /* Links */
-  --link-color:            var(--whiteish);
-  --link-color-hover:      var(--white);
-  --link-color-active:     var(--accent-color);
+  --link-color:            var(--accent-color);
+  --link-color-hover:      var(--green);
+  --link-color-active:     var(--red);
 }

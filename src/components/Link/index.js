@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import styles from './styles.css'
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -6,7 +7,7 @@ const Link = ({ active, children, onClick }) => {
   }
 
   return (
-    <a href='#' onClick={e => {
+    <a href='#' className={styles.link} onClick={e => {
       e.preventDefault()
       onClick()
     }}>
