@@ -38,7 +38,6 @@
 var webpack = require('webpack')
 var path = require('path')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var autoprefixer = require('autoprefixer')
 
 module.exports = {
   entry: [
@@ -55,12 +54,10 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('./assets/css/main.css', { allChunks: true }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    /*
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       output: { comments: false }
     }),
-    */
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })
@@ -69,17 +66,14 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
+        include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        loader: 'babel'
       },
       {
         test: /\.css$/,
+        include: path.join(__dirname, 'src'),
         loader: ExtractTextPlugin.extract('style', 'css!postcss')
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       },
       {
         test: /\.(jpg|png|svg)$/,
@@ -87,5 +81,13 @@ module.exports = {
       }
     ]
   },
-  postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
+  postcss: function (webpack) {
+    return [
+      require('postcss-import')({ addDependencyTo: webpack }),
+      require('postcss-url')(),
+      require('postcss-cssnext')(),
+      require('postcss-normalize'),
+      require('postcss-nested')
+    ]
+  }
 }

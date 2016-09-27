@@ -44,7 +44,6 @@
 var webpack = require('webpack')
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var autoprefixer = require('autoprefixer')
 
 module.exports = {
   entry: [
@@ -55,7 +54,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '/index.js'
+    filename: 'index.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json']
@@ -82,25 +81,22 @@ module.exports = {
     preLoaders: [
       {
         test: /\.jsx?$/,
+        include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
-        loader: 'standard',
-        include: path.join(__dirname, 'src')
+        loader: 'standard'
       }
     ],
     loaders: [
       {
         test: /\.jsx?$/,
+        include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        loader: 'babel'
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss']
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'postcss', 'sass']
+        include: path.join(__dirname, 'src'),
+        loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test: /\.html$/,
@@ -115,5 +111,13 @@ module.exports = {
   standard: {
     parser: 'babel-eslint'
   },
-  postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
+  postcss: function (webpack) {
+    return [
+      require('postcss-import')({ addDependencyTo: webpack }),
+      require('postcss-url')(),
+      require('postcss-cssnext')(),
+      require('postcss-normalize'),
+      require('postcss-nested')
+    ]
+  }
 }

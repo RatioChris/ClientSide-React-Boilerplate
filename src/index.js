@@ -1,16 +1,16 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, browserHistory } from 'react-router'
-import App from './App'
-require('file?name=./index.html!./index.html')
-require('./assets/scss/main.scss')
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+import App from './components/App'
+require('./assets/css/main.css')
 
-const routes = {
-  path: '/',
-  component: App
-}
+let store = createStore(todoApp)
 
 render(
-  <Router history={browserHistory} routes={routes} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )

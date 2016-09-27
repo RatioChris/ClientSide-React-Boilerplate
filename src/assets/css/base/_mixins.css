@@ -1,11 +1,3 @@
-// -----------------------------------------------------------------------------
-// This file contains SASS mixins.
-// -----------------------------------------------------------------------------
-
-/// Responsive breakpoint manager
-/// @param {String} $breakpoint - Breakpoint
-/// @requires $breakpoints (set in _variables)
-/// @link http://sass-guidelin.es/#breakpoint-manager Sass Guidelines - Breakpoint Manager
 @mixin respond-to($breakpoint) {
   $query: map-get($breakpoints, $breakpoint);
 

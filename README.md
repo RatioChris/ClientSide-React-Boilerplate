@@ -18,7 +18,7 @@ npm start
 Open [http://localhost:5000](http://localhost:5000)
 
 
-#### Linting
+### Linting
 
 ESLint with Standard formatting and React linting options have been enabled.
 * [JavaScript Standard Style](http://standardjs.com/)
